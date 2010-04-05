@@ -113,16 +113,16 @@ void QtOgreWidget::createRenderWindow(void) {
 #else
     QX11Info info = x11Info();
 	Ogre::String winHandle;
-	winHandle  = Ogre::StringConverter::toString(reinterpret_cast<unsigned long>(info.display()));
+	winHandle  = Ogre::StringConverter::toString((unsigned long)(info.display()));
 	winHandle += ":";
-	winHandle += Ogre::StringConverter::toString(static_cast<unsigned int>(info.screen()));
-	// TODO: do we need this?
-	//winHandle += ":";
-	//winHandle += Ogre::StringConverter::toString(reinterpret_cast<unsigned long>(parentWidget()->winId()));
+	winHandle += Ogre::StringConverter::toString((unsigned int)(info.screen()));
+	winHandle += ":";
+	winHandle += Ogre::StringConverter::toString((unsigned long)(this->parentWidget()->winId()));
 	params["parentWindowHandle"] = winHandle;
+
 #endif
-	mRenderWindow = mOgreRoot->createRenderWindow("View" + Ogre::StringConverter::toString(reinterpret_cast<unsigned long>(this)),
-													width(), height(), false, &params);
+	mRenderWindow = mOgreRoot->createRenderWindow("View" + Ogre::StringConverter::toString((unsigned long) this),
+			width(), height(), false, &params);
 	
 #if defined(Q_WS_MAC)
 	// store context for hack
