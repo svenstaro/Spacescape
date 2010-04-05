@@ -1,1 +1,6 @@
 build
+*.log
+*.o
+*.so
+*.a
+*.bin
